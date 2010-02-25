@@ -1,0 +1,11 @@
+[SONG]
+id = AllBlues(M.Davis)
+tempo = 148
+n_choruses = 3
+title = All Blues (M.Davis)
+key = C
+n_bars = 24
+active_instruments = piano bass drums
+style = jazz_waltz
+chords = 3G7 3G9 3G13 3G9 3G7 3G9 3G13 3G9 3C9 3C13 3C9 3C7 3G7 3G9 3G13 3G9 3D7 3D7#9 3Eb7alt 3D7#9 3G7 3G9 3G13 3G9
+

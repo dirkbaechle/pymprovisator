@@ -1,0 +1,647 @@
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook V4.1//EN">
+<book lang="en">
+  <bookinfo>
+    <title>Pymprovisator's user manual</title>
+    <author>
+      <firstname>David Asorey Álvarez</firstname>
+      <affiliation>
+	<address>forodejazz@yahoo.es</address>
+      </affiliation>
+    </author>
+    <releaseinfo>Versión 1.0</releaseinfo>
+    <abstract>
+      <para>Pymprovisator is a program for jazz musicians. Jazz music
+      is based on improvising and this program helps to the
+      improvisator.
+	The user sets the song's parameters (title, style, bars
+      number, chord sequence, etc.) and the program generates
+      a MIDI file with an appropiated accompainment.</para>
+
+      <para>This program was inspired by PG Music's Band in a Box
+      software and the CD+Book sets from Jamey Aebersold.</para>
+
+      <para>Pymprovisator can run on any computer and any operating
+      system capable of run the Python programming
+      language. Pymprovisator has been tested on Windows boxes (98, NT
+	& 2000), Linux (RedHat, Debian and Mandrake), FreeBSD and
+      BeOS.</para>
+
+      <para>This program is free software, open source, GPL
+	licensed. See the LICENSE.TXT file for more details.</para>
+    </abstract>
+  </bookinfo>
+  <chapter id="intro">
+    <title>Introduction </title>
+    <sect1 id="present">
+      <title>Crash course</title>
+      <para><productname>Pymprovisator</productname> has two modes:
+      command line or graphic user interface. In command line mode,
+      the program reads a song file and produces the corresponding
+      MIDI file. You can learn more about the song file format below
+      (<xref linkend="song">). </para>
+
+      <sect2 id="command">
+	<title>Command line usage</title>
+      <para>Using the program in command line mode is very easy. You
+	  call the program and pass the location of a
+      <productname>pymprovisator</productname> song. The program will
+      generate a MIDI file and will launch your prefered MIDI
+      player. Look this example:
+<screen>
+python pymprovisator.py  examples/test_song.ymp
+Executing: /usr/bin/abc2midi "/tmp/@6691.0.abc" -o "/home/david/pymprovisator/examples/ThisIsAnotherTestSong.mid"
+MIDI file saved on /home/david/pymprovisator/examples/ThisIsAnotherTestSong.mid
+Executing: /usr/bin/playmidi -e "/home/david/pymprovisator/examples/ThisIsAnotherTestSong.mid"
+Playmidi 2.4 Copyright (C) 1994-1997 Nathan I. Laredo, AWE32 by Takashi Iwai
+This is free software with ABSOLUTELY NO WARRANTY.
+For details please see the file COPYING.</screen>
+The program reads the song, generates an temporary file with .abc
+	  extension and using the auxiliar program
+	  <productname>abc2midi</productname> generates the MIDI
+	  file. Finally, launches your prefered MIDI player (playmidi
+	  in this example).</para>
+
+      <para>In order to a correct operation, your
+	  <productname>Pymprovisator</productname> configuration file must be
+	  present and must specify the correct path to the auxiliary
+	  programs (<productname>abc2midi</productname> and your
+	  prefered MIDI player). You can learn how to install your
+	  configuration file below (<xref linkend="config">).</para>
+
+	<para> <productname>Pymprovisator</productname> offers more
+	  options in command line mode: <keysym>-h</keysym>, show a
+	  short help message; <keysym>-c</keysym>, show the available
+	  chord that <productname>Pymprovisator</productname> can
+	  manage; <keysym>-s</keysym>, create a basic config file in
+	  your HOME directory. See below (<xref linkend="config">).
+</para>
+      </sect2>
+      <sect2 id="gui">
+	<title>Graphical user interface usage</title>
+	<para>In order to run <productname>Pymprovisator</productname>
+	with graphical user interface, call the program with the
+	option <keysym>-g</keysym> or <keysym>--gui</keysym>.  You may
+	specify the path to a song file and the program will load the
+	song on startup:<screen>
+python pymprovisator.py  -g examples/test_song.ymp
+Using song file: '/home/david/pymprovisator/examples/test_song.ymp'
+</screen>
+    (There is another way: executing the script
+    <command>pymprovisator.pyw</command>, in that case, you do not
+    need pass the <keysym>-g</keysym> or
+    <keysym>--gui</keysym> options, neither the path to a song). 
+    You will see a window showing all the parameters of a song: 
+    title, style, key, bars number, etc.).
+    <informalfigure>
+	      <screenshot>
+		<mediaobject>
+		  <imageobject>
+		    <imagedata fileref="../images/pymprovisator.png" format="png">
+		  </imageobject>
+		  <imageobject>
+		    <imagedata fileref="../images/pymprovisator.eps" format="eps" scale="50">
+		  </imageobject>
+		  <textobject>
+		    <phrase>Pymprovisator window</phrase>
+		  </textobject>
+		</mediaobject>
+	      </screenshot>
+	    </informalfigure>
+	</para>
+	<para>The buttons are, from left to right: 
+    <command>New song</command>, <command>Open song</command>, 
+    <command>Save song</command>, <command>Edit chords</command>,
+    <command>Play song</command>, <command>Preferences</command> and
+    <command>Clear chord secuence</command>.</para>
+	<para>You can access to the chord secuence using the menu 
+    <keysym>Song > Chords </keysym>or by pushing the button.</para>
+	<para>You will see the chords editing window:
+	    <informalfigure>
+	      <screenshot>
+		<mediaobject>
+		  <imageobject>
+		    <imagedata fileref="../images/chords_window.png" format="png">
+		  </imageobject>
+		  <imageobject>
+		    <imagedata fileref="../images/chords_window.eps" format="eps" scale="50">
+		  </imageobject>
+		  <textobject>
+		    <phrase>Chord editing window</phrase>
+		  </textobject>
+		</mediaobject>
+	      </screenshot>
+	    </informalfigure>
+	</para>
+       </sect2>
+    </sect1>
+    <sect1 id="req">
+      <title>Requeriments</title>
+      <para>If your operating system is Windows, you have to read this note
+       (<xref linkend="nota-windows">)</para>
+      <para>This program is written in Python programming language and uses as intermediate
+      format the ABC music notation system. Thus, this are the requeriments:
+      </para>
+      <itemizedlist>
+	<listitem>
+	  <para><emphasis>Python, version 2.1 or higher.</emphasis>
+        In almost all Linux or *BSD distributions you will find Python 
+        allready installed or available as package. There is versions for 
+        other operating systems such as Windows, BeOS, MacOS and more.</para>
+	  <para>You can visit the Python's official page 
+      (<ulink url="http://www.python.org">
+	    http://www.python.org</ulink>) and download a version for your
+        operating system.
+	  </para>
+	  <para>You can check if Python is installed by typing in your command line:
+      <command>python</command></para>
+	  <para>You have to read something like this:</para>
+	  <screen>
+Python 2.1.3 (#1, Sep  7 2002, 15:29:56) 
+[GCC 2.95.4 20011002 (Debian prerelease)] on linux2
+Type "copyright", "credits" or "license" for more information.
+>>></screen>
+	  <para>Type <keysym>Ctl+D</keysym> to exit. On Windows,
+	  <keysym>Ctl+Z</keysym>.</para>
+	</listitem>
+	<listitem>
+	  <para>If you want to use the graphic user interface, your Python instalation
+      needs a module called <emphasis>Tkinter</emphasis>. Again, this module is
+      standard in almost all Linux distributions, FreeBSD and MacOS.
+      Unfortunately, this module is not available on BeOS, thus, BeOS users must use
+      the command line version.
+	  </para>
+	  <para>You can check if <emphasis>Tkinter</emphasis> is properly installed
+      typing this commands in your command line:
+    </para>
+	  <screen>
+Python 2.1.3 (#1, Sep  7 2002, 15:29:56) 
+[GCC 2.95.4 20011002 (Debian prerelease)] on linux2
+Type "copyright", "credits" or "license" for more information.
+>>> from Tkinter import *
+>>> root = Tk()
+>>></screen>
+	  <para>If you don't see any error message and a small window like this is raised
+      on your desktop, your installation is successful:
+	    <informalfigure>
+	      <screenshot>
+		<mediaobject>
+		  <imageobject>
+		    <imagedata fileref="../images/tkinter.png" format="png">
+		  </imageobject>
+		  <imageobject>
+		    <imagedata fileref="../images/tkinter.eps" format="eps" scale="50">
+		  </imageobject>
+		  <textobject>
+		    <phrase>Tkinter window</phrase>
+		  </textobject>
+		</mediaobject>
+	      </screenshot>
+	    </informalfigure>
+	  </para>
+	  <para>Otherwise, if you see any error, like this:
+	    <screen>
+>>> import Tkinter
+Traceback (most recent call last):
+  File &quot;&lt;stdin&quot;&gt;, line 1, in ?
+ImportError: No module named Tkinter
+>>></screen>
+you will have to check your installation. Remember
+    that Tkinter is a module available for Linux, FreeBSD, MacOS and 
+    Windows.</para>
+	</listitem>
+	<listitem>
+	  <para><emphasis>ABC2MIDI</emphasis>.
+	  <productname>abc2midi</productname> is a small
+      program that convers songs in ABC music notation format to
+      standard MIDI file. <productname>Pymprovisator</productname>
+	  works in background in ABC format and needs this program in order
+      to obtain a MIDI file.</para>
+      <para>
+      This program is not usual as others, but some Linux distributions
+      includes it (as Debian). If you haven't this program, you can dowload
+      a version for your operating system at abcMIDI's web page (<ulink
+	  url="http://abc.sourceforge.net/abcMIDI/">
+	  http://abc.sourceforge.net/abcMIDI/</ulink>). 
+      We have included some precompiled versions here, in the 
+	  <command>pymprovisator/exes</command> directory. 
+      You can use the appropiated version for your OS.</para>
+	 </listitem>
+	<listitem>
+	  <para>A <emphasis>MIDI player</emphasis>.
+	  On Windows boxes, <productname>Windows Media
+	  Player</productname> is a good election. 
+      In other systems, you can use <productname>playmidi</productname>,
+      <productname>timidity</productname>, <productname>kmid</productname>
+      or another program.</para>
+	</listitem>
+      </itemizedlist>
+      <sect2 id="nota-windows">
+	<title>Windows users note</title>
+	<para>If your use Windows, you have two options. First,
+	dowload a "self-contained" version. In this version, you
+	don't need check out the requeriments described above. This
+	version comes with all included. You don't need Python,
+	neither abc2midi. Just execute the installer and run the
+	program as a common Windows program
+	(<command>pymprovisator.exe</command>). This is the
+	recommended version.
+
+	<para>If you want to hack the code, or you have Python
+	  installed, you can download the source code version. In this
+	  case, you have to check the requeriments described above.
+All the explanations given in this section are valid, excepting the paths: in
+	  UNIX-like systems, the path is specified like
+	  <command>/the/path/to/my/file</command>, in Windows you have
+	  to specify the path like
+	  <command>C:\the\path\to\my\file</command>. Be awared with
+	  this if you need edit your configuration file. (See <xref
+	  linkend="config">). </para>
+      </sect2>
+    </sect1>
+    <sect1 id="install">
+      <title>Installing the program</title>
+      <para>If your use Windows, you can download the "self-contained"
+      version (a file called
+      <productname>pymprovisator-xx-win32.zip</productname>) or the
+      source code version. The installation of the "self-contained"
+      version is very easy: just unzip the downloaded file and run the
+      installation program. The installation program will put icons on
+      your "Programs" menu, like any other Windows application. 
+      <para>If you want to use the source code version, download the
+      file called <productname>pymprovisator-xx-src.zip</productname>
+      and stay reading this manual.
+      </para>
+      <para>If you use other operating systems, you have to download
+	the file <productname>pymprovisator-xx-src.zip</productname> or
+      the file <productname>pymprovisator-xx-src.tgz</productname> and
+	decompress it.
+      </para>
+      <para>When uncompressed, you will have this directory structure:
+<screen>
+pymprovisator
+
+pymprovisator/doc
+
+pymprovisator/examples
+
+pymprovisator/exes
+
+pymprovisator/i18n
+
+pymprovisator/modules
+	</screen>The main directory is
+	<command>pymprovisator</command>. In this directory resides
+	the file <command>pymprovisator.py</command>, that is the main
+	executable file. There is also another file,
+	<command>pymprovisator.pyw</command>, that launches the
+	graphical user interface, without passing any options in the
+	command line. 
+      </para>
+      <para>In the directory <command>doc</command> you find this manual.
+In directory <command>examples</command> there are some example songs
+	an a sample configuration file that you can copy to your HOME
+	directory and rename to
+	<command>.pymprovisator.conf</command>. See <xref
+	linkend="config">.</para> 
+
+      <para>The directory <command>exes</command> contains the
+	<productname>abc2midi</productname> program, compiled for
+	various operating systems. Finally, the directories
+	<command>i18n</command> and <command>modules</command>
+	contains the program's code.
+<caution>
+	  <para>Don't touch the files in <command>i18n</command> and
+	  <command>modules</command> if you aren't sure of what are
+	  you doing.</para>
+	</caution>
+      </para>
+    </sect1>
+  </chapter>
+  <chapter id="song">
+    <title>Song's format</title>
+    <para><productname>Pymprovisator</productname> uses a format very
+    similar to .ini files. A pymprovisator song starts with a header
+    <command>[SONG]</command> and more lines describing the song's parameters:
+      <screen>
+[SONG]
+# This is an example song
+id = ThisIsATestSong
+tempo = 153
+n_choruses = 10
+title = This is a test song
+key = C
+n_bars = 12
+active_instruments = piano bass drums
+style = basic
+chords = 4c7 4f7 8c7 8f7 8c7 4g7 4f7 4c7 4g7
+</screen></para>
+    <para>In this example you can see all the elements that makes a
+      song. By default, <productname>Pymprovisator</productname> songs
+      are saved with <command>.ymp</command> extension, but you can
+      use another extension. Let's see all the elements:
+      <itemizedlist>
+	<listitem>
+	  <para><emphasis>id</emphasis> Text, without spaces or
+	    puctuation signs. Identifies the song and it's used when
+	    generating the MIDI files.</para> 
+	</listitem>
+	<listitem>
+	  <para><emphasis>tempo</emphasis> Indicates the song speed or
+	   ticks per minute. It must be a numerical value, integer,
+	   greater than 0. 
+	  </para> 
+	</listitem>
+	<listitem>
+	  <para><emphasis>n_choruses</emphasis> Number of choruses to
+	    be generated. Numeric value, integer greater than 0.</para>
+	</listitem>
+	<listitem>
+	  <para><emphasis>title</emphasis> Song's title</para>
+	</listitem>
+	<listitem>
+	  <para><emphasis>key</emphasis> Song's key. Available values
+	  are: C, C#, Db, D, D#, Eb, E, F, F#, Gb, G, G#, Ab, A, A#,
+	  Bb, B, Cm, C#m, Dbm, Dm, D#m, Ebm, Em, Fm, F#m, Gbm, Gm,
+	  G#m, Abm, Am, A#m, Bbm and Bm</para> 
+	</listitem>
+	<listitem>
+	  <para><emphasis>n_bars</emphasis> Number of bars or
+	  measures. Integer greater than 0.</para>
+	</listitem>
+	<listitem>
+	  <para><emphasis>active_instruments</emphasis> Indicates
+	    which instruments will be used in the song. At least one
+	    of this: "piano", "bass" or "drums" (don't type the quotes).</para>
+	</listitem>
+	<listitem>
+	  <para><emphasis>style</emphasis> Song style. This styles are
+	    defined: swing, even_eights, jazz_waltz, waltz,
+	    five_swing, five, latin1, latin2, bossa, samba, ballad,
+	    funk, rock y basic. 
+	    We don't describe them: their names must be very
+	    descriptive!. </para> 
+
+	  <para>All styles are in 4/4 meter, except waltz and
+	  jazz_waltz, in 3/4 and five and five_swing, in 5/4.</para>
+	</listitem>
+	<listitem>
+	  <para><emphasis>chords</emphasis> Song's chord sequence,
+	    spaciated with  blank spaces. The chords are written in
+	    standard jazz notation, and each of one is preceded by a
+	    number especifing the number of beats or duration of the
+	    chord, even if the chord is ocupping one beat.</para>
+
+	  <para>Very important: the chords sequence must be coherent
+	    with the measures number. Thus, in the given example, we
+	    find 12 bars, in 'basic' style (4/4). Our song has 48
+	    beats (12x4). Comprobation: 
+           4 + 4 + 8 + 8 + 8 + 4 + 4 + 4 + 4 = 48 beats. That's
+	    OK!.</para>   
+	</listitem>
+       </itemizedlist>
+      The order of this lines is not mandatory, but all parameters are
+      needed. You can 
+      write comments in your song files by typing an sharp simbol (#)
+      at the start of a line, like the example (<computeroutput># This
+      is an example song ...</computeroutput>).   
+    </para>
+  </chapter>
+  <chapter id="config">
+    <title>The configuration file</title>
+
+    <para>In order to grant a proper running, you need a configuration
+      file on your home directory, named as
+      <command>.pymprovisator.conf</command>. If you use the graphical
+      interface mode, you can setup your configuracion by the menu
+      <keysym>Song > Preferences</keysym> or by the button
+ <informalfigure>
+	      <screenshot>
+		<mediaobject>
+		  <imageobject>
+		    <imagedata fileref="../images/prefs.png" format="png">
+		  </imageobject>
+		  <imageobject>
+		    <imagedata fileref="../images/prefs.eps" format="eps" scale="50">
+		  </imageobject>
+		  <textobject>
+		    <phrase>Preferences button</phrase>
+		  </textobject>
+		</mediaobject>
+	      </screenshot>
+	    </informalfigure>
+    </para>
+    <para>If you use the command line version, you have two options.
+ </para>
+<para>First and easiest: run the program with the option -s:
+<screen>
+python pymprovisator.py -s
+</screen>
+This command will create in your HOME directory a configuration file
+      that you have to edit and adjust to your system (see below).
+</para>
+<para>
+Second, more difficult:
+Copy to your HOME directory the sample configuration file provided in     
+the directory <command>pymprovisator/examples/</command> with this command:
+<screen>
+cp pymprovisator/examples/pymprovisator.conf.example ~/.pymprovisator.conf
+</screen>
+When you have created your configuration file, you have to edit and
+      adjust to your preferences. Don't erase any line: the program
+      will not run properly:
+<screen>
+[PREFERED_INSTRUMENTS]
+bass = Acoustic Bass
+piano = Percussive Organ
+
+[PREFERED_VOLUME]
+drums = 90
+bass = 90
+piano = 90
+
+[PATHS]
+midiplayer = /usr/bin/timidity -ig
+abc2midi = /home/david/myprograms/pymprovisator/exes/linux/abc2midi
+</screen></para>
+    <para>
+In [PREFERED_INSTRUMENTS] section, you have to write the full name
+      as listed below (<xref linkend="midi">).
+    </para>
+    <para>
+In [PREFERED_VOLUME] section, you have to write a numerical value,
+      integer, greater than 0 and less than 128.
+</para>
+    <para>Finally, en [PATHS] section you have to write the full path
+    to your auxiliary programs ( <command>abc2midi</command> and a
+    MIDI player). Remember: there are some precompiled versions of
+    <command>abc2midi</command> in the directory
+    <command>pymprovisator/exes</command>. Look at this directory
+    before download anything. The abcMIDI's page is in (<ulink
+    url="http://abc.sourceforge.net/abcMIDI">http://abc.sourceforge.net/abcMIDI
+    </ulink>).  
+    You can download abc2midi from this location.
+   </para> 
+  <sect1 id="windows-home">
+              <title>Note for Windows users who will use the source
+              code version</title> 
+
+              <para>In the Windows operating system there isn't HOME
+	directory. There are something similar, but not the same. In
+	home-oriented Windows, like 95, 98 and Me, the HOME concept
+	doesn't exists. <productname>Pymprovisator</productname> will
+	look for your configuration file in some location. On Windows 9x/Me
+	will look in C:\, on Windows NT, in C:\WINNT\Profiles and on
+	Windows 2000 will look in C:\Documents and
+	Settings </para>
+
+              <para>We can't be sure, this locations may be overriden
+              or different. The most safe procedure is execute the
+              program with the option <keysym>-s</keysym> the first
+              time. This will create in some location on your hard
+	drives a file called
+              <command>.pymprovisator.conf</command>. Just execute:
+<screen>
+python pymprovisator.py -s
+</screen>
+ (You must have the Python interpreter in your PATH). After this, you
+	have to look for the configuration file and edit it.
+                </para>
+            </sect1>
+
+    <sect1 id="midi">
+      <title>MIDI instruments listing</title>
+      <para>
+<screen>
+Acoustic Grand Piano
+Bright Acoustic Piano
+Electric Grand Piano
+Honky-tonk Piano
+Electric Piano 1
+Electric Piano 2
+Harpsichord
+Clavi
+Celesta
+Glockenspiel
+Music Box
+Vibraphone
+Marimba
+Xylophone
+Tubular Bells
+Dulcimer
+Drawbar Organ
+Percussive Organ
+Rock Organ
+Church Organ
+Reed Organ
+Accordion
+Harmonica
+Tango Accordion
+Acoustic Guitar (nylon)
+Acoustic Guitar (steel)
+Electric Guitar (jazz)
+Electric Guitar (clean)
+Electric Guitar (muted)
+Overdriven Guitar
+Distortion Guitar
+Guitar harmonics
+Acoustic Bass
+Electric Bass (finger)
+Electric Bass (pick)
+Fretless Bass
+Slap Bass 1
+Slap Bass 2
+Synth Bass 1
+Synth Bass 2
+Violin
+Viola
+Cello
+Contrabass
+Tremolo Strings
+Pizzicato Strings
+Orchestral Harp
+Timpani
+String Ensemble 1
+String Ensemble 2
+SynthStrings 1
+SynthStrings 2
+Choir Aahs
+Voice Oohs
+Synth Voice
+Orchestra Hit
+Trumpet
+Trombone
+Tuba
+Muted Trumpet
+French Horn
+Brass Section
+SynthBrass 1
+SynthBrass 2
+Soprano Sax
+Alto Sax
+Tenor Sax
+Baritone Sax
+Oboe
+English Horn
+Bassoon
+Clarinet
+Piccolo
+Flute
+Recorder
+Pan Flute
+Blown Bottle
+Shakuhachi
+Whistle
+Ocarina
+Lead 1 (square)
+Lead 2 (sawtooth)
+Lead 3 (calliope)
+Lead 4 (chiff)
+Lead 5 (charang)
+Lead 6 (voice)
+Lead 7 (fifths)
+Lead 8 (bass + lead)
+Pad 1 (new age)
+Pad 2 (warm)
+Pad 3 (polysynth)
+Pad 4 (choir)
+Pad 5 (bowed)
+Pad 6 (metallic)
+Pad 7 (halo)
+Pad 8 (sweep)
+FX 1 (rain)
+FX 2 (soundtrack)
+FX 3 (crystal)
+FX 4 (atmosphere)
+FX 5 (brightness)
+FX 6 (goblins)
+FX 7 (echoes)
+FX 8 (sci-fi)
+Sitar
+Banjo
+Shamisen
+Koto
+Kalimba
+Bag pipe
+Fiddle
+Shanai
+Tinkle Bell
+Agogo
+Steel Drums
+Woodblock
+Taiko Drum
+Melodic Tom
+Synth Drum
+Reverse Cymbal
+Guitar Fret Noise
+Breath Noise
+Seashore
+Bird Tweet
+Telephone Ring
+Helicopter
+Applause
+Gunshot
+</screen>
+      </para> 
+    </sect1>
+  </chapter>
+</book>

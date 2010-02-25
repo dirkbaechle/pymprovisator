@@ -1,0 +1,275 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML
+><HEAD
+><TITLE
+>El archivo de configuración</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
+"><LINK
+REL="HOME"
+TITLE="Manual del usuario de Pymprovisator"
+HREF="index.html"><LINK
+REL="PREVIOUS"
+TITLE="Formato de las canciones"
+HREF="song.html"><LINK
+REL="NEXT"
+TITLE="Listado de instrumentos MIDI"
+HREF="midi.html"></HEAD
+><BODY
+CLASS="CHAPTER"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Manual del usuario de Pymprovisator</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="song.html"
+ACCESSKEY="P"
+>Anterior</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="midi.html"
+ACCESSKEY="N"
+>Siguiente</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="CHAPTER"
+><H1
+><A
+NAME="CONFIG">Capítulo 3. El archivo de configuración</H1
+><P
+>Para un funcionamiento correcto del programa, en su
+    directorio HOME debe existir un archivo de configuración. Si está
+    utilizando la interfaz gráfica del programa, puede establecer los
+    valores correctos a través del menú <SPAN
+CLASS="KEYSYM"
+>Canción &#62;
+    Preferencias</SPAN
+> o del botón <DIV
+CLASS="INFORMALFIGURE"
+><A
+NAME="AEN206"><P
+></P
+><DIV
+CLASS="MEDIAOBJECT"
+><P
+><IMG
+SRC="../images/prefs.png"></P
+></DIV
+><P
+></P
+></DIV
+>
+    </P
+><P
+>Si va a utilizar únicamente la versión en línea de comandos
+    del programa, tiene dos opciones: </P
+><P
+>Primera y más sencilla: ejecutar el programa con la opción -s:<PRE
+CLASS="SCREEN"
+>python pymprovisator.py -s</PRE
+>
+      Esto creará en la ubicación adecuada el archivo de configuración que
+    puede ser posteriormente ajustado (vea un poco más abajo cómo
+    hacerlo).</P
+><P
+>    También puede hacerlo un poco más complicado: copie a su
+    directorio HOME el archivo de muestra que se encuentra en el directorio
+    <B
+CLASS="COMMAND"
+>pymprovisator/examples/</B
+> mediante el siguiente
+    comando:<PRE
+CLASS="SCREEN"
+>cp pymprovisator/examples/pymprovisator.conf.example ~/.pymprovisator.conf</PRE
+>
+      A continuación, edite el archivo
+      <B
+CLASS="COMMAND"
+>.pymprovisator.conf</B
+> y modifique los distintos
+      valores. No borre ninguna línea, si no el programa
+      fallará. Veamos un ejemplo:<PRE
+CLASS="SCREEN"
+>[PREFERED_INSTRUMENTS]
+bass = Acoustic Bass
+piano = Percussive Organ
+
+[PREFERED_VOLUME]
+drums = 90
+bass = 90
+piano = 90
+
+[PATHS]
+midiplayer = /usr/bin/timidity -ig
+abc2midi = /usr/bin/abc2midi</PRE
+></P
+><P
+>      En la sección de instrumentos preferidos, debe ponerse el nombre
+      completo del instrumento tal y como figura en el listado que a
+      continuación se adjunta (<A
+HREF="midi.html"
+>Sección 3.2</A
+>).
+    </P
+><P
+>En la parte correspondiente al volumen con el cual sonará
+    cada instrumento, debe introducir un valor entre 0 y 127.</P
+><P
+>Finalmente, en la sección de ubicación de los programas
+      auxiliares ([PATHS]) debe escribir la ruta completa al programa
+      <B
+CLASS="COMMAND"
+>abc2midi</B
+> y a su reproductor de archivos MIDI
+    preferido. Recuerde que en se ha incluído el programa abc2midi en
+      el directorio <B
+CLASS="COMMAND"
+>pymprovisator/exes</B
+>, compilado
+    para distintos sistemas operativos. En cualquier caso, siempre
+      puede acudir a la página Web de
+      <SPAN
+CLASS="PRODUCTNAME"
+>abcMIDI</SPAN
+>
+ (<A
+HREF="http://abc.sourceforge.net/abcMIDI"
+TARGET="_top"
+>http://abc.sourceforge.net/abcMIDI</A
+>) y descargar el programa.</P
+><DIV
+CLASS="SECT1"
+><H1
+CLASS="SECT1"
+><A
+NAME="WINDOWS-HOME">3.1. Nota para usuarios de Windows que NO utilicen la versión
+              "autocontenida"</H1
+><P
+>En el sistema operativo Windows, el concepto de directorio
+              "HOME", típico de UNIX, tambíén existe, pero no definido de una
+              manera tan precisa. En sistemas Windows "domésticos" (Windows
+              95, 98 y Millenium) no hay un directorio "HOME", ya que no son
+              sistemas realmente multiusuario.
+	<SPAN
+CLASS="PRODUCTNAME"
+>Pymprovisator</SPAN
+> buscará el
+              archivo de configuración en el directorio raíz (C:\), pero no
+              podemos asegurar ésto. En el sistema Windows NT, este archivo
+              será buscado en C:\WINNT\Profiles, y en Windows 2000, en
+              C:\Documents and Settings </P
+><P
+>Como no podemos preveer si estos ajustes predeterminados
+               sean siempre los mismos, puede ejecutar el programa en
+	línea de comandos con la opción <SPAN
+CLASS="KEYSYM"
+>-s</SPAN
+>, lo que
+              generará en algún punto de su disco duro un fichero de
+              configuración:<PRE
+CLASS="SCREEN"
+>python pymprovisator.py -s</PRE
+>
+ (Deberá tener el intérprete de
+               python en su PATH). Para localizar este archivo de
+               configuración una vez creado, sólo tiene que buscar un archivo
+               *.conf en su(s) disco(s) duro.
+                </P
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="song.html"
+ACCESSKEY="P"
+>Anterior</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Inicio</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="midi.html"
+ACCESSKEY="N"
+>Siguiente</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Formato de las canciones</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+>&nbsp;</TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Listado de instrumentos MIDI</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

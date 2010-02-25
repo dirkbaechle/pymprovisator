@@ -1,0 +1,22 @@
+BODY, TD { 
+	background-color : #FFFFCC; 
+	margin: 10px; 
+	font-family : sans-serif; 
+} 
+P { 
+	text-align : justify; 
+/*	padding-right : 10px;
+	padding-left: 10px; */
+} 
+IMG { 
+	margin-right : 20px; 
+} 
+.ABSTRACT {
+	margin: 15px; 
+}
+.COMMAND {
+	background-color : #CCCCCC;
+}
+.KEYSYM {
+	background-color : #CCCCCC;
+}

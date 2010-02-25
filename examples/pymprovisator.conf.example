@@ -1,0 +1,15 @@
+[PREFERED_INSTRUMENTS]
+bass = Acoustic Bass
+piano = Acoustic Grand Piano
+
+[PREFERED_VOLUME]
+drums = 90
+bass = 90
+piano = 90
+
+[PATHS]
+#Windows users, specify full path, ex.: C:\Programs\pymprovisator\exes\win32\abc2midi.exe
+#Unix users: see below:
+midiplayer = /usr/bin/timidity -ig
+abc2midi = /home/myself/myprograms/pymprovisator/exes/myos/abc2midi
+

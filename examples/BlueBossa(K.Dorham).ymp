@@ -1,0 +1,11 @@
+[SONG]
+id = BlueBossa(K.Dorham)
+tempo = 150
+n_choruses = 5
+title = Blue Bossa (K.Dorham)
+key = Cm
+n_bars = 32
+active_instruments = piano bass drums
+style = bossa
+chords = 4cm6 4cm7 4fm7 4fm9 4dm7b5 4g7b9 4cm9 4cm6 4ebm7 4ab7 4dbmaj7 4dbmaj9 4dm7b5 4g7b9 4cm7 2dm7b5 2g7alt 4cm6 4cm7 4fm7 4fm9 4dm7b5 4g7b9 4cm9 4cm6 4ebm7 4ab7 4dbmaj7 4dbmaj9 4dm7b5 4g7b9 4cm7 2dm7b5 2g7alt
+

@@ -1,0 +1,305 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML
+><HEAD
+><TITLE
+>Song's format</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
+"><LINK
+REL="HOME"
+TITLE="Pymprovisator's user manual"
+HREF="index.html"><LINK
+REL="PREVIOUS"
+TITLE="Installing the program"
+HREF="install.html"><LINK
+REL="NEXT"
+TITLE="The configuration file"
+HREF="config.html"></HEAD
+><BODY
+CLASS="CHAPTER"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Pymprovisator's user manual</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="install.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="config.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="CHAPTER"
+><H1
+><A
+NAME="SONG">Chapter 2. Song's format</H1
+><P
+><SPAN
+CLASS="PRODUCTNAME"
+>Pymprovisator</SPAN
+> uses a format very
+    similar to .ini files. A pymprovisator song starts with a header
+    <B
+CLASS="COMMAND"
+>[SONG]</B
+> and more lines describing the song's parameters:
+      <PRE
+CLASS="SCREEN"
+>[SONG]
+# This is an example song
+id = ThisIsATestSong
+tempo = 153
+n_choruses = 10
+title = This is a test song
+key = C
+n_bars = 12
+active_instruments = piano bass drums
+style = basic
+chords = 4c7 4f7 8c7 8f7 8c7 4g7 4f7 4c7 4g7</PRE
+></P
+><P
+>In this example you can see all the elements that makes a
+      song. By default, <SPAN
+CLASS="PRODUCTNAME"
+>Pymprovisator</SPAN
+> songs
+      are saved with <B
+CLASS="COMMAND"
+>.ymp</B
+> extension, but you can
+      use another extension. Let's see all the elements:
+      <P
+></P
+><UL
+><LI
+><P
+><SPAN
+CLASS="emphasis"
+><I
+CLASS="EMPHASIS"
+>id</I
+></SPAN
+> Text, without spaces or
+	    puctuation signs. Identifies the song and it's used when
+	    generating the MIDI files.</P
+></LI
+><LI
+><P
+><SPAN
+CLASS="emphasis"
+><I
+CLASS="EMPHASIS"
+>tempo</I
+></SPAN
+> Indicates the song speed or
+	   ticks per minute. It must be a numerical value, integer,
+	   greater than 0. 
+	  </P
+></LI
+><LI
+><P
+><SPAN
+CLASS="emphasis"
+><I
+CLASS="EMPHASIS"
+>n_choruses</I
+></SPAN
+> Number of choruses to
+	    be generated. Numeric value, integer greater than 0.</P
+></LI
+><LI
+><P
+><SPAN
+CLASS="emphasis"
+><I
+CLASS="EMPHASIS"
+>title</I
+></SPAN
+> Song's title</P
+></LI
+><LI
+><P
+><SPAN
+CLASS="emphasis"
+><I
+CLASS="EMPHASIS"
+>key</I
+></SPAN
+> Song's key. Available values
+	  are: C, C#, Db, D, D#, Eb, E, F, F#, Gb, G, G#, Ab, A, A#,
+	  Bb, B, Cm, C#m, Dbm, Dm, D#m, Ebm, Em, Fm, F#m, Gbm, Gm,
+	  G#m, Abm, Am, A#m, Bbm and Bm</P
+></LI
+><LI
+><P
+><SPAN
+CLASS="emphasis"
+><I
+CLASS="EMPHASIS"
+>n_bars</I
+></SPAN
+> Number of bars or
+	  measures. Integer greater than 0.</P
+></LI
+><LI
+><P
+><SPAN
+CLASS="emphasis"
+><I
+CLASS="EMPHASIS"
+>active_instruments</I
+></SPAN
+> Indicates
+	    which instruments will be used in the song. At least one
+	    of this: "piano", "bass" or "drums" (don't type the quotes).</P
+></LI
+><LI
+><P
+><SPAN
+CLASS="emphasis"
+><I
+CLASS="EMPHASIS"
+>style</I
+></SPAN
+> Song style. This styles are
+	    defined: swing, even_eights, jazz_waltz, waltz,
+	    five_swing, five, latin1, latin2, bossa, samba, ballad,
+	    funk, rock y basic. 
+	    We don't describe them: their names must be very
+	    descriptive!. </P
+><P
+>All styles are in 4/4 meter, except waltz and
+	  jazz_waltz, in 3/4 and five and five_swing, in 5/4.</P
+></LI
+><LI
+><P
+><SPAN
+CLASS="emphasis"
+><I
+CLASS="EMPHASIS"
+>chords</I
+></SPAN
+> Song's chord sequence,
+	    spaciated with  blank spaces. The chords are written in
+	    standard jazz notation, and each of one is preceded by a
+	    number especifing the number of beats or duration of the
+	    chord, even if the chord is ocupping one beat.</P
+><P
+>Very important: the chords sequence must be coherent
+	    with the measures number. Thus, in the given example, we
+	    find 12 bars, in 'basic' style (4/4). Our song has 48
+	    beats (12x4). Comprobation: 
+           4 + 4 + 8 + 8 + 8 + 4 + 4 + 4 + 4 = 48 beats. That's
+	    OK!.</P
+></LI
+></UL
+>
+      The order of this lines is not mandatory, but all parameters are
+      needed. You can 
+      write comments in your song files by typing an sharp simbol (#)
+      at the start of a line, like the example (<TT
+CLASS="COMPUTEROUTPUT"
+># This
+      is an example song ...</TT
+>).   
+    </P
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="install.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="config.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Installing the program</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+>&nbsp;</TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>The configuration file</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

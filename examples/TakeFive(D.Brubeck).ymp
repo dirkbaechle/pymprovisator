@@ -1,0 +1,11 @@
+[SONG]
+id = TakeFive(D.Brubeck)
+tempo = 171
+n_choruses = 3
+title = Take Five (D. Brubeck)
+key = Ebm
+n_bars = 20
+active_instruments = piano bass drums
+style = five_swing
+chords = 3Ebm 2Bbm7 3Ebm 2Bbm7 3Ebm 2Bbm7 3Ebm 2Bbm7 3Ebm 2Bbm7 3Ebm 2Bbm7 3Ebm 2Bbm7 3Ebm 2Bbm7 3Cbmaj7 2Abm6 3Bbm7 2Ebm7 3Abm7 2Db7 5Gbmaj7 3Cbmaj7 2Abm6 3Bbm7 2Ebm7 3Abm7 2Db7 3Bbm7 2Bb7 3Ebm 2Bbm7 3Ebm 2Bbm7 3Ebm 2Bbm7 3Ebm 2Bbm7
+

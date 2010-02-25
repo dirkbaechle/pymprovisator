@@ -1,0 +1,11 @@
+[SONG]
+id = BluesInEFlat
+tempo = 150
+n_choruses = 3
+title = Blues in E flat
+key = Eb
+n_bars = 12
+active_instruments = piano bass drums
+style = swing
+chords = 4Eb9 4Ab7 4Eb7 2Bbm7 2Eb7 4Ab7 4Adism 4Eb7 2Gm7 2C7 4Fm7 4Bb7 2Eb7 2C7#9 2Fm7 2Bbalt
+

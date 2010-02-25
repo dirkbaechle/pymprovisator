@@ -1,0 +1,64 @@
+[SONG]
+# THIS SONG IS NOT VALID.
+# This is an example song, it can be used as example for your songs.
+# The most important: Write the chord in the showed style: XY
+# X: Parts, Y: Chord.
+# This chords are available (defined in music_constants.py)
+# ionian_chords : M 6 maj7 maj9 maj13
+# dorian_chords : m m6 m7 m9 m11
+# phrygian_chords : susb9
+# lydian_chords : #11 maj7#11
+# mixolydian_chords : 7,9 13
+# mixolydian_sus_chords : 11 sus sus7 sus9 sus13
+# aeolian_chords : mb6 m7b6
+# locrian_chords : m7b5
+# minor_major_chords : mmaj7 mmaj9
+# lydian_augmented_chords : maj7+5 +maj7
+# lydian_dominant_chords : 7#11 9#11 13#11
+# altered_chords : alt 7alt
+# augmented_chords : +,+7
+# disminised_chords : º º7 dism
+# disminised_inv_chords : 7b9 7#9 7b5
+
+# Please, don't put blank spaces in 'id' field
+id: test_song
+
+title: This is a test song
+
+tempo: 300
+
+# Valid keys: 
+# C C# Db D D# Eb E F F# 
+# Gb G G# Ab A A# Bb B 
+# Cm C#m Dbm Dm D#m Ebm Em Fm F#m 
+# Gbm Gm G#m Abm Am A#m Bbm Bm
+key: Eb
+
+
+# Available: 
+# swing, even_eights, jazz_waltz, waltz, five_swing, five, latin,
+# bossa, samba, ballad, modern, funk, rock, basic 
+# This styles are defined in song.py, line 58.
+style: basic
+
+
+# List of chords (properly, duration + chord
+# See the example: 4 + 4 + 4 + 2 + 2 + 4 + 4 + 4 + 2 + 2 + 4 + 4 + 2 + 2 + 2 + 1 = 47 parts
+# style 'basic' -> 4/4, thus, 12 bars, 4 pars each one = 48 parts
+# THIS CHORDS ARE INCONSISTENT: 1Bbalt would be 2Bbalt
+chords: 4Eb9 4Ab7 4Eb7 2Bbm7 2Eb7 4Ab7 4Adism 4Eb7 2Gm7 2C7 4Fm7 4Bb7 2Eb7 2C7#9 2Fm7 1Bbalt
+
+
+
+# Bars number in a chorus
+# Be careful with the durations and the bars number: it must be consistent.
+n_bars: 12
+
+# How many choruses would you like generate?
+n_choruses: 3
+
+# Which instruments would you like generate?
+# Valid choices: bass piano drums
+active_instruments: bass piano drums
+
+# That's all. Excuse my poor english. 

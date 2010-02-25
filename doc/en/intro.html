@@ -1,0 +1,337 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML
+><HEAD
+><TITLE
+>Introduction </TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
+"><LINK
+REL="HOME"
+TITLE="Pymprovisator's user manual"
+HREF="index.html"><LINK
+REL="PREVIOUS"
+TITLE="Pymprovisator's user manual"
+HREF="index.html"><LINK
+REL="NEXT"
+TITLE="Requeriments"
+HREF="req.html"></HEAD
+><BODY
+CLASS="CHAPTER"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Pymprovisator's user manual</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="index.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="req.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="CHAPTER"
+><H1
+><A
+NAME="INTRO">Chapter 1. Introduction </H1
+><DIV
+CLASS="SECT1"
+><H1
+CLASS="SECT1"
+><A
+NAME="PRESENT">1.1. Crash course</H1
+><P
+><SPAN
+CLASS="PRODUCTNAME"
+>Pymprovisator</SPAN
+> has two modes:
+      command line or graphic user interface. In command line mode,
+      the program reads a song file and produces the corresponding
+      MIDI file. You can learn more about the song file format below
+      (<A
+HREF="song.html"
+>Chapter 2</A
+>). </P
+><DIV
+CLASS="SECT2"
+><H2
+CLASS="SECT2"
+><A
+NAME="COMMAND">1.1.1. Command line usage</H2
+><P
+>Using the program in command line mode is very easy. You
+	  call the program and pass the location of a
+      <SPAN
+CLASS="PRODUCTNAME"
+>pymprovisator</SPAN
+> song. The program will
+      generate a MIDI file and will launch your prefered MIDI
+      player. Look this example:
+<PRE
+CLASS="SCREEN"
+>python pymprovisator.py  examples/test_song.ymp
+Executing: /usr/bin/abc2midi "/tmp/@6691.0.abc" -o "/home/david/pymprovisator/examples/ThisIsAnotherTestSong.mid"
+MIDI file saved on /home/david/pymprovisator/examples/ThisIsAnotherTestSong.mid
+Executing: /usr/bin/playmidi -e "/home/david/pymprovisator/examples/ThisIsAnotherTestSong.mid"
+Playmidi 2.4 Copyright (C) 1994-1997 Nathan I. Laredo, AWE32 by Takashi Iwai
+This is free software with ABSOLUTELY NO WARRANTY.
+For details please see the file COPYING.</PRE
+>
+The program reads the song, generates an temporary file with .abc
+	  extension and using the auxiliar program
+	  <SPAN
+CLASS="PRODUCTNAME"
+>abc2midi</SPAN
+> generates the MIDI
+	  file. Finally, launches your prefered MIDI player (playmidi
+	  in this example).</P
+><P
+>In order to a correct operation, your
+	  <SPAN
+CLASS="PRODUCTNAME"
+>Pymprovisator</SPAN
+> configuration file must be
+	  present and must specify the correct path to the auxiliary
+	  programs (<SPAN
+CLASS="PRODUCTNAME"
+>abc2midi</SPAN
+> and your
+	  prefered MIDI player). You can learn how to install your
+	  configuration file below (<A
+HREF="config.html"
+>Chapter 3</A
+>).</P
+><P
+> <SPAN
+CLASS="PRODUCTNAME"
+>Pymprovisator</SPAN
+> offers more
+	  options in command line mode: <SPAN
+CLASS="KEYSYM"
+>-h</SPAN
+>, show a
+	  short help message; <SPAN
+CLASS="KEYSYM"
+>-c</SPAN
+>, show the available
+	  chord that <SPAN
+CLASS="PRODUCTNAME"
+>Pymprovisator</SPAN
+> can
+	  manage; <SPAN
+CLASS="KEYSYM"
+>-s</SPAN
+>, create a basic config file in
+	  your HOME directory. See below (<A
+HREF="config.html"
+>Chapter 3</A
+>).</P
+></DIV
+><DIV
+CLASS="SECT2"
+><H2
+CLASS="SECT2"
+><A
+NAME="GUI">1.1.2. Graphical user interface usage</H2
+><P
+>In order to run <SPAN
+CLASS="PRODUCTNAME"
+>Pymprovisator</SPAN
+>
+	with graphical user interface, call the program with the
+	option <SPAN
+CLASS="KEYSYM"
+>-g</SPAN
+> or <SPAN
+CLASS="KEYSYM"
+>--gui</SPAN
+>.  You may
+	specify the path to a song file and the program will load the
+	song on startup:<PRE
+CLASS="SCREEN"
+>python pymprovisator.py  -g examples/test_song.ymp
+Using song file: '/home/david/pymprovisator/examples/test_song.ymp'</PRE
+>
+    (There is another way: executing the script
+    <B
+CLASS="COMMAND"
+>pymprovisator.pyw</B
+>, in that case, you do not
+    need pass the <SPAN
+CLASS="KEYSYM"
+>-g</SPAN
+> or
+    <SPAN
+CLASS="KEYSYM"
+>--gui</SPAN
+> options, neither the path to a song). 
+    You will see a window showing all the parameters of a song: 
+    title, style, key, bars number, etc.).
+    <DIV
+CLASS="INFORMALFIGURE"
+><A
+NAME="AEN48"><P
+></P
+><DIV
+CLASS="MEDIAOBJECT"
+><P
+><IMG
+SRC="../images/pymprovisator.png"></P
+></DIV
+><P
+></P
+></DIV
+>
+	</P
+><P
+>The buttons are, from left to right: 
+    <B
+CLASS="COMMAND"
+>New song</B
+>, <B
+CLASS="COMMAND"
+>Open song</B
+>, 
+    <B
+CLASS="COMMAND"
+>Save song</B
+>, <B
+CLASS="COMMAND"
+>Edit chords</B
+>,
+    <B
+CLASS="COMMAND"
+>Play song</B
+>, <B
+CLASS="COMMAND"
+>Preferences</B
+> and
+    <B
+CLASS="COMMAND"
+>Clear chord secuence</B
+>.</P
+><P
+>You can access to the chord secuence using the menu 
+    <SPAN
+CLASS="KEYSYM"
+>Song &#62; Chords </SPAN
+>or by pushing the button.</P
+><P
+>You will see the chords editing window:
+	    <DIV
+CLASS="INFORMALFIGURE"
+><A
+NAME="AEN68"><P
+></P
+><DIV
+CLASS="MEDIAOBJECT"
+><P
+><IMG
+SRC="../images/chords_window.png"></P
+></DIV
+><P
+></P
+></DIV
+>
+	</P
+></DIV
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="index.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="req.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Pymprovisator's user manual</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+>&nbsp;</TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Requeriments</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>
