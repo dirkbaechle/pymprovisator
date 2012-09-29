@@ -48,7 +48,7 @@ class Song:
     def __init__(self, id, title, tempo, key, style, chord_seq, n_bars, n_choruses, instruments):
         parts = 0
         if not key in valid_keys:
-            raise MyException("Key not valid")
+            raise MyException("Key %s not valid!" % key)
         self.id = id
         self.title = title
         self.tempo = tempo

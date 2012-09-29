@@ -23,10 +23,7 @@ class Chord:
     if chord_name.strip() == "":
         raise MyException(_("Not chord given"))
     self.name = chord_name[0].upper() + chord_name[1:]
-    if self.name == "" or (self.name[0] <> 'A' \
-    and self.name[0] <> 'B' and self.name[0] <> 'C' \
-    and self.name[0] <> 'D' and self.name[0] <> 'E' \
-    and self.name[0] <> 'F' and self.name[0] <> 'G' ):
+    if not self.name in ['A','B','C','D','E','F','G']:
         raise MyException(_("Chord not valid -> Root not valid: ") + self.name[0])
     else:
       #print self.name
@@ -67,10 +64,10 @@ class Chord:
         else:
             raise MyException(_("Chord not valid: ") + chord_name + _(" -> Chord type not found"))
       else:
-        self.tp = ''
+        self.tp = 'M'
         self.type = "ionian"
-      self.rt = self.name[:pointer] 
-      if not self.tp in chord_arpeggio.keys(): raise MyException(_("Unknown chord"))
+      self.rt = self.name[:pointer]
+      if not self.tp in chord_arpeggio.keys(): raise MyException(_("Unknown chord")+": "+self.tp)
       self.scale = []
       for note in escale_notes[self.type]:
           self.scale.append(note + self.root)
