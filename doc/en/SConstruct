@@ -1,0 +1,4 @@
+env = Environment(tools=['docbook'])
+
+env.DocbookHtml('manual')
+env.DocbookPdf('manual')

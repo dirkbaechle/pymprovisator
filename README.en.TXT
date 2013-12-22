@@ -8,8 +8,5 @@ the book+CD sets from Jamey Aebersold.
 
 This program is free software, GPL licensed, see the file LICENSE.TXT
 
-Full documentation is available in english and spanish,
-see at DOC directory.
-
-Written by David Asorey Álvarez (forodejazz@yahoo.es).
+Written by David Asorey Alvarez (forodejazz@yahoo.es).
 Madrid (Spain). June 2003.

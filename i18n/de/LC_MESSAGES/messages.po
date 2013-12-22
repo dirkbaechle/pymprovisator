@@ -1,0 +1,6 @@
+# Deutsche Übersetzung für Pymprovisator
+# Copyright (C) 2003 David Asorey Alvarez
+# David Asorey Alvarez forodejazz@yahoo.es, 2003.
+#
+msgid ""
+msgstr ""

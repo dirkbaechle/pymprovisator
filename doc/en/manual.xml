@@ -1,14 +1,18 @@
-<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook V4.1//EN">
+<?xml version="1.0"?>
+
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.2//EN"
+"http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd">
+
 <book lang="en">
   <bookinfo>
     <title>Pymprovisator's user manual</title>
     <author>
-      <firstname>David Asorey Álvarez</firstname>
+      <firstname>David Asorey Alvarez</firstname>
       <affiliation>
 	<address>forodejazz@yahoo.es</address>
       </affiliation>
     </author>
-    <releaseinfo>Versión 1.0</releaseinfo>
+    <releaseinfo>Version 1.0</releaseinfo>
     <abstract>
       <para>Pymprovisator is a program for jazz musicians. Jazz music
       is based on improvising and this program helps to the
@@ -23,7 +27,7 @@
       <para>Pymprovisator can run on any computer and any operating
       system capable of run the Python programming
       language. Pymprovisator has been tested on Windows boxes (98, NT
-	& 2000), Linux (RedHat, Debian and Mandrake), FreeBSD and
+	and 2000), Linux (RedHat, Debian and Mandrake), FreeBSD and
       BeOS.</para>
 
       <para>This program is free software, open source, GPL
@@ -32,15 +36,15 @@
   </bookinfo>
   <chapter id="intro">
     <title>Introduction </title>
-    <sect1 id="present">
+    <section id="present">
       <title>Crash course</title>
       <para><productname>Pymprovisator</productname> has two modes:
       command line or graphic user interface. In command line mode,
       the program reads a song file and produces the corresponding
       MIDI file. You can learn more about the song file format below
-      (<xref linkend="song">). </para>
+      (<xref linkend="song"/>). </para>
 
-      <sect2 id="command">
+      <section id="command">
 	<title>Command line usage</title>
       <para>Using the program in command line mode is very easy. You
 	  call the program and pass the location of a
@@ -66,17 +70,17 @@ The program reads the song, generates an temporary file with .abc
 	  present and must specify the correct path to the auxiliary
 	  programs (<productname>abc2midi</productname> and your
 	  prefered MIDI player). You can learn how to install your
-	  configuration file below (<xref linkend="config">).</para>
+	  configuration file below (<xref linkend="config"/>).</para>
 
 	<para> <productname>Pymprovisator</productname> offers more
 	  options in command line mode: <keysym>-h</keysym>, show a
 	  short help message; <keysym>-c</keysym>, show the available
 	  chord that <productname>Pymprovisator</productname> can
 	  manage; <keysym>-s</keysym>, create a basic config file in
-	  your HOME directory. See below (<xref linkend="config">).
+	  your HOME directory. See below (<xref linkend="config"/>).
 </para>
-      </sect2>
-      <sect2 id="gui">
+      </section>
+      <section id="gui">
 	<title>Graphical user interface usage</title>
 	<para>In order to run <productname>Pymprovisator</productname>
 	with graphical user interface, call the program with the
@@ -96,10 +100,10 @@ Using song file: '/home/david/pymprovisator/examples/test_song.ymp'
 	      <screenshot>
 		<mediaobject>
 		  <imageobject>
-		    <imagedata fileref="../images/pymprovisator.png" format="png">
+		    <imagedata fileref="../images/pymprovisator.png" format="png"/>
 		  </imageobject>
 		  <imageobject>
-		    <imagedata fileref="../images/pymprovisator.eps" format="eps" scale="50">
+		    <imagedata fileref="../images/pymprovisator.eps" format="eps" scale="50"/>
 		  </imageobject>
 		  <textobject>
 		    <phrase>Pymprovisator window</phrase>
@@ -120,10 +124,10 @@ Using song file: '/home/david/pymprovisator/examples/test_song.ymp'
 	      <screenshot>
 		<mediaobject>
 		  <imageobject>
-		    <imagedata fileref="../images/chords_window.png" format="png">
+		    <imagedata fileref="../images/chords_window.png" format="png"/>
 		  </imageobject>
 		  <imageobject>
-		    <imagedata fileref="../images/chords_window.eps" format="eps" scale="50">
+		    <imagedata fileref="../images/chords_window.eps" format="eps" scale="50"/>
 		  </imageobject>
 		  <textobject>
 		    <phrase>Chord editing window</phrase>
@@ -132,12 +136,12 @@ Using song file: '/home/david/pymprovisator/examples/test_song.ymp'
 	      </screenshot>
 	    </informalfigure>
 	</para>
-       </sect2>
-    </sect1>
-    <sect1 id="req">
+       </section>
+    </section>
+    <section id="req">
       <title>Requeriments</title>
       <para>If your operating system is Windows, you have to read this note
-       (<xref linkend="nota-windows">)</para>
+       (<xref linkend="nota-windows"/>)</para>
       <para>This program is written in Python programming language and uses as intermediate
       format the ABC music notation system. Thus, this are the requeriments:
       </para>
@@ -186,10 +190,10 @@ Type "copyright", "credits" or "license" for more information.
 	      <screenshot>
 		<mediaobject>
 		  <imageobject>
-		    <imagedata fileref="../images/tkinter.png" format="png">
+		    <imagedata fileref="../images/tkinter.png" format="png"/>
 		  </imageobject>
 		  <imageobject>
-		    <imagedata fileref="../images/tkinter.eps" format="eps" scale="50">
+		    <imagedata fileref="../images/tkinter.eps" format="eps" scale="50"/>
 		  </imageobject>
 		  <textobject>
 		    <phrase>Tkinter window</phrase>
@@ -235,7 +239,7 @@ you will have to check your installation. Remember
       or another program.</para>
 	</listitem>
       </itemizedlist>
-      <sect2 id="nota-windows">
+      <section id="nota-windows">
 	<title>Windows users note</title>
 	<para>If your use Windows, you have two options. First,
 	dowload a "self-contained" version. In this version, you
@@ -244,7 +248,7 @@ you will have to check your installation. Remember
 	neither abc2midi. Just execute the installer and run the
 	program as a common Windows program
 	(<command>pymprovisator.exe</command>). This is the
-	recommended version.
+	recommended version.</para>
 
 	<para>If you want to hack the code, or you have Python
 	  installed, you can download the source code version. In this
@@ -255,10 +259,10 @@ All the explanations given in this section are valid, excepting the paths: in
 	  to specify the path like
 	  <command>C:\the\path\to\my\file</command>. Be awared with
 	  this if you need edit your configuration file. (See <xref
-	  linkend="config">). </para>
-      </sect2>
-    </sect1>
-    <sect1 id="install">
+	  linkend="config"/>). </para>
+      </section>
+    </section>
+    <section id="install">
       <title>Installing the program</title>
       <para>If your use Windows, you can download the "self-contained"
       version (a file called
@@ -266,7 +270,7 @@ All the explanations given in this section are valid, excepting the paths: in
       source code version. The installation of the "self-contained"
       version is very easy: just unzip the downloaded file and run the
       installation program. The installation program will put icons on
-      your "Programs" menu, like any other Windows application. 
+      your "Programs" menu, like any other Windows application.</para> 
       <para>If you want to use the source code version, download the
       file called <productname>pymprovisator-xx-src.zip</productname>
       and stay reading this manual.
@@ -302,7 +306,7 @@ In directory <command>examples</command> there are some example songs
 	an a sample configuration file that you can copy to your HOME
 	directory and rename to
 	<command>.pymprovisator.conf</command>. See <xref
-	linkend="config">.</para> 
+	linkend="config"/>.</para> 
 
       <para>The directory <command>exes</command> contains the
 	<productname>abc2midi</productname> program, compiled for
@@ -315,7 +319,7 @@ In directory <command>examples</command> there are some example songs
 	  you doing.</para>
 	</caution>
       </para>
-    </sect1>
+    </section>
   </chapter>
   <chapter id="song">
     <title>Song's format</title>
@@ -418,10 +422,10 @@ chords = 4c7 4f7 8c7 8f7 8c7 4g7 4f7 4c7 4g7
 	      <screenshot>
 		<mediaobject>
 		  <imageobject>
-		    <imagedata fileref="../images/prefs.png" format="png">
+		    <imagedata fileref="../images/prefs.png" format="png"/>
 		  </imageobject>
 		  <imageobject>
-		    <imagedata fileref="../images/prefs.eps" format="eps" scale="50">
+		    <imagedata fileref="../images/prefs.eps" format="eps" scale="50"/>
 		  </imageobject>
 		  <textobject>
 		    <phrase>Preferences button</phrase>
@@ -465,7 +469,7 @@ abc2midi = /home/david/myprograms/pymprovisator/exes/linux/abc2midi
 </screen></para>
     <para>
 In [PREFERED_INSTRUMENTS] section, you have to write the full name
-      as listed below (<xref linkend="midi">).
+      as listed below (<xref linkend="midi"/>).
     </para>
     <para>
 In [PREFERED_VOLUME] section, you have to write a numerical value,
@@ -481,7 +485,7 @@ In [PREFERED_VOLUME] section, you have to write a numerical value,
     </ulink>).  
     You can download abc2midi from this location.
    </para> 
-  <sect1 id="windows-home">
+  <section id="windows-home">
               <title>Note for Windows users who will use the source
               code version</title> 
 
@@ -506,9 +510,9 @@ python pymprovisator.py -s
  (You must have the Python interpreter in your PATH). After this, you
 	have to look for the configuration file and edit it.
                 </para>
-            </sect1>
+            </section>
 
-    <sect1 id="midi">
+    <section id="midi">
       <title>MIDI instruments listing</title>
       <para>
 <screen>
@@ -642,6 +646,6 @@ Applause
 Gunshot
 </screen>
       </para> 
-    </sect1>
+    </section>
   </chapter>
 </book>
