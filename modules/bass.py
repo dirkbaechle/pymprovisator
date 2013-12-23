@@ -8,49 +8,48 @@ from constants import *
 import preferences
 
 class BassLine:
-    def __init__(self, instrument, song):
+    def __init__(self, instrument):
         self.instrument = instrument
-        self.song = song
-        self.meter = song.style.meter[0]
 
-    def generate_line(self):
+    def generate_line(self, song):
         "Probably, the most important piece of code."
+        meter = song.style.meter[0]
         temp = generate_instrument_header('This is the bass line', '1', '1', 
                str(instrument_names.index(self.instrument)), 
                'I:clef=bass octave=-2', '%%MIDI control 10 1', 
                '%%MIDI control 7 ' + str(preferences.get_prefered_volume()['bass'])
                )
-        if self.song.style.name == 'swing':
+        if song.style.name == 'swing':
             temp.append('z8')
             temp2 = []
-            for ch in self.song.chord_item_collection:
+            for ch in song.chord_item_collection:
                 bass_line = ''
                 parts = int(ch.parts)
-                bass_line += walking_pattern(ch, parts, int(self.meter))
+                bass_line += walking_pattern(ch, parts, int(meter))
                 temp2.append(bass_line)
-            temp += int(self.song.n_choruses)*temp2
-        elif self.song.style.name == 'even_eights':
+            temp += int(song.n_choruses)*temp2
+        elif song.style.name == 'even_eights':
             temp.append('z8')
             temp2 = []
-            for ch in self.song.chord_item_collection:
+            for ch in song.chord_item_collection:
                 bass_line = ''
                 parts = int(ch.parts)
-                bass_line += walking_pattern(ch, parts, int(self.meter))
+                bass_line += walking_pattern(ch, parts, int(meter))
                 temp2.append(bass_line)
-            temp += int(self.song.n_choruses)*temp2
-        elif self.song.style.name == 'jazz_waltz':
+            temp += int(song.n_choruses)*temp2
+        elif song.style.name == 'jazz_waltz':
             temp.append('z6')
             temp2 = []
-            for ch in self.song.chord_item_collection:
+            for ch in song.chord_item_collection:
                 bass_line = ''
                 parts = int(ch.parts)
-                bass_line += walking_pattern(ch, parts, int(self.meter))
+                bass_line += walking_pattern(ch, parts, int(meter))
                 temp2.append(bass_line)
-            temp += int(self.song.n_choruses)*temp2
-        elif self.song.style.name == 'waltz':
+            temp += int(song.n_choruses)*temp2
+        elif song.style.name == 'waltz':
             temp.append('z6')
             temp2 = []
-            for ch in self.song.chord_item_collection:
+            for ch in song.chord_item_collection:
                 bass_line = ''
                 note1 = notes_abc[ch.chord.root]
                 note2 = notes_abc[ch.chord.root + escale_notes[ch.chord.type][4]]  # 5th note of chord
@@ -69,21 +68,21 @@ class BassLine:
                     elif parts2 == 2:
                         bass_line += note1 + ' ' + note2 + ' '
                 temp2.append(bass_line)
-            temp += int(self.song.n_choruses)*temp2
-        elif self.song.style.name == 'five_swing':
+            temp += int(song.n_choruses)*temp2
+        elif song.style.name == 'five_swing':
             temp.append('z10')
             temp2 = []
-            for ch in self.song.chord_item_collection:
+            for ch in song.chord_item_collection:
                 bass_line = ''
                 parts = int(ch.parts)
-                bass_line += walking_pattern(ch, parts, int(self.meter))
+                bass_line += walking_pattern(ch, parts, int(meter))
                 temp2.append(bass_line)
-            temp += int(self.song.n_choruses)*temp2
+            temp += int(song.n_choruses)*temp2
             pass
-        elif self.song.style.name == 'five':
+        elif song.style.name == 'five':
             temp.append('z10')
             temp2 = []
-            for ch in self.song.chord_item_collection:
+            for ch in song.chord_item_collection:
                 bass_line = ''
                 note1 = notes_abc[ch.chord.root]
                 note2 = notes_abc[ch.chord.root + escale_notes[ch.chord.type][4]]  # 5th note of chord
@@ -110,11 +109,11 @@ class BassLine:
                     elif parts2 == 4:
                         bass_line += note1 + '3/2 ' + note2 + '3/2 ' + note1 + ' '
                 temp2.append(bass_line)
-            temp += int(self.song.n_choruses)*temp2
-        elif self.song.style.name == 'latin1':
+            temp += int(song.n_choruses)*temp2
+        elif song.style.name == 'latin1':
             temp.append('z8')
             temp2 = []
-            for ch in self.song.chord_item_collection:
+            for ch in song.chord_item_collection:
                 bass_line = ''
                 note1 = notes_abc[ch.chord.root]
                 note2 = notes_abc[ch.chord.root + escale_notes[ch.chord.type][4]]  # 5th note of chord
@@ -138,11 +137,11 @@ class BassLine:
                     elif parts2 == 3:
                         bass_line += note1 + '3/2 ' + note3 + '/ ' + note2 + ' '
                 temp2.append(bass_line)
-            temp += int(self.song.n_choruses)*temp2
-        elif self.song.style.name == 'latin2':
+            temp += int(song.n_choruses)*temp2
+        elif song.style.name == 'latin2':
             temp.append('z8')
             temp2 = []
-            for ch in self.song.chord_item_collection:
+            for ch in song.chord_item_collection:
                 bass_line = ''
                 note1 = notes_abc[ch.chord.root]
                 note2 = notes_abc[ch.chord.root + escale_notes[ch.chord.type][4]]  # 5th note of chord
@@ -166,11 +165,11 @@ class BassLine:
                     elif parts2 == 3:
                         bass_line += note1 + '3/2 ' + note2 + '3/2 '
                 temp2.append(bass_line)
-            temp += int(self.song.n_choruses)*temp2
-        elif self.song.style.name == 'bossa':
+            temp += int(song.n_choruses)*temp2
+        elif song.style.name == 'bossa':
             temp.append('z8')
             temp2 = []
-            for ch in self.song.chord_item_collection:
+            for ch in song.chord_item_collection:
                 bass_line = ''
                 note1 = notes_abc[ch.chord.root]
                 note2 = notes_abc[ch.chord.root + escale_notes[ch.chord.type][4]]  # 5th note of chord
@@ -193,11 +192,11 @@ class BassLine:
                     elif parts2 == 3:
                         bass_line += note1 + '3/2 ' + note1 + '/ ' + note2
                 temp2.append(bass_line)
-            temp += int(self.song.n_choruses)*temp2
-        elif self.song.style.name == 'samba1' or self.song.style.name == 'samba2':
+            temp += int(song.n_choruses)*temp2
+        elif song.style.name == 'samba1' or song.style.name == 'samba2':
             temp.append('z8')
             temp2 = []
-            for ch in self.song.chord_item_collection:
+            for ch in song.chord_item_collection:
                 bass_line = ''
                 note1 = notes_abc[ch.chord.root]
                 note2 = notes_abc[ch.chord.root + escale_notes[ch.chord.type][4]]  # 5th note of chord
@@ -220,11 +219,11 @@ class BassLine:
                     elif parts2 == 3:
                         bass_line += note1 + '3/2 ' + note1 + '/ ' + note2
                 temp2.append(bass_line)
-            temp += int(self.song.n_choruses)*temp2
-        elif self.song.style.name == 'ballad':
+            temp += int(song.n_choruses)*temp2
+        elif song.style.name == 'ballad':
             temp.append('z8')
             temp2 = []
-            for ch in self.song.chord_item_collection:
+            for ch in song.chord_item_collection:
                 bass_line = ''
                 note1 = notes_abc[ch.chord.root]
                 note2 = notes_abc[ch.chord.root + escale_notes[ch.chord.type][4]]  # 5th note of chord
@@ -247,12 +246,12 @@ class BassLine:
                     elif parts2 == 3:
                         bass_line += note1 + '2 ' + note2 + ' '
                 temp2.append(bass_line)
-            temp += int(self.song.n_choruses)*temp2
-        elif self.song.style.name == 'funk':
+            temp += int(song.n_choruses)*temp2
+        elif song.style.name == 'funk':
             # Copy & Paste from H. Hancock's 'Cantaloupe island' ;-)
             temp.append('z8')
             temp2 = []
-            for ch in self.song.chord_item_collection:
+            for ch in song.chord_item_collection:
                 bass_line = ''
                 note1 = notes_abc[ch.chord.root]
                 note2 = notes_abc[ch.chord.root + escale_notes[ch.chord.type][4]]  # 5th note of chord
@@ -277,11 +276,11 @@ class BassLine:
                     elif parts2 == 3:
                         bass_line += note1 + '3/2 ' + note2 + '/ '
                 temp2.append(bass_line)
-            temp += int(self.song.n_choruses)*temp2
-        elif self.song.style.name == 'rock':
+            temp += int(song.n_choruses)*temp2
+        elif song.style.name == 'rock':
             temp.append('z8')
             temp2 = []
-            for ch in self.song.chord_item_collection:
+            for ch in song.chord_item_collection:
                 bass_line = ''
                 note1 = notes_abc[ch.chord.root]
                 note2 = notes_abc[ch.chord.root - escale_notes[ch.chord.type][3]]  # 5th note of chord, descending
@@ -304,18 +303,18 @@ class BassLine:
                     elif parts2 == 3:
                         bass_line += note1 + '/ ' + note1 + '/ ' + note1 + '/ ' + note1 + '/ ' + note1 + '/ ' + note2 + '/ ' 
                 temp2.append(bass_line)
-            temp += int(self.song.n_choruses)*temp2
-        elif self.song.style.name == 'basic':
+            temp += int(song.n_choruses)*temp2
+        elif song.style.name == 'basic':
             temp.append('z8')
             temp2 = []
-            for ch in self.song.chord_item_collection:
+            for ch in song.chord_item_collection:
                 bass_note = notes_abc[ch.chord.root]
                 temp2 += [bass_note]*int(ch.parts)
-            for x in range(int(self.song.n_choruses)):
+            for x in range(int(song.n_choruses)):
                 temp.append(" ".join(temp2))
         else:
             raise MyException("Style not found")
-        temp.append(notes_abc[self.song.chord_item_collection[0].chord.root] + self.meter)
+        temp.append(notes_abc[song.chord_item_collection[0].chord.root] + meter)
         return temp
         
 def split_long_chord(parts, unit):

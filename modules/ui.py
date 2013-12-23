@@ -89,6 +89,8 @@ class MainWindow:
         self.menu_file.add_command(label=_("Open song"), command=self.OnOpen)
         self.menu_file.add_command(label=_("Save song"), command=self.OnSave)
         self.menu_file.add_separator()
+        self.menu_file.add_command(label=_("Export ABC"), command=self.OnExportABC)
+        self.menu_file.add_separator()
         self.menu_file.add_command(label=_("Exit"), command=self.OnExit)
         # "Song" menu:
         self.menu_song = Menu(self.menu_bar, tearoff=0)
@@ -289,28 +291,11 @@ class MainWindow:
                 self.Song = None
                 return
 
-    def OnExit(self):
-        if self.Song:
-            if tkMessageBox.askyesno(_("Exit"), _("If you haven't saved your song, your work will be lost.\nAre you sure?")):
-                self.root.quit()
-        else:
-                self.root.quit()
-    def OnChords(self): ui_dialogs.ChordsWindow(self)
-    def OnClear(self): 
-        if tkMessageBox.askyesno(_("Clear chords"), _("The chords will be erased.\nAre you sure?")):
-            self.var_chords = []
-    def OnPlay(self):
+
+    def OnExportABC(self):
         validation = self.__check_values()
         if not validation[0]:
-            tkMessageBox.showwarning(_("Playing song"), _("There was an error while generating the song file:\n") + validation[1])
-            return
-        abc2midi = preferences.get_external_prog_path('ABC2MIDI')
-        midiplayer = preferences.get_external_prog_path('MIDIPLAYER')
-        if not abc2midi:
-            tkMessageBox.showwarning(_("abc2midi program not found"), _("Please, check your preferences file (") + preferences.preferences_file + ")" )
-            return
-        if not midiplayer:
-            tkMessageBox.showwarning(_("MIDI player program not found"), _("Please, check your preferences file (") + preferences.preferences_file + ")" )
+            tkMessageBox.showwarning(_("Exporting ABC"), _("There was an error while generating the song file:\n") + validation[1])
             return
         try:
             destination = self.var_title.get().title().replace(' ', '')
@@ -324,17 +309,65 @@ class MainWindow:
             self.Song = None
             return
         final = self.Song.generate_song(preferences.get_prefered_instruments())
-        input = tempfile.mktemp('.abc')
-        abc_file = open(input, 'w')
-        output = os.path.abspath(self.last_dir + '/' + self.Song.id + '.mid')
-        for l in final:
-            abc_file.write(l + "\n")
-        abc_file.close()
-        command = abc2midi + ' "' + input + '" -o "' + output + '"'
-        popen2.popen2(command)
-        command = midiplayer + ' "' + output + '"'
-        popen2.popen2(command)
-        return
+        
+        file = tkFileDialog.asksaveasfilename(title = _("Save ABC file"), filetypes=[(_("ABC file"), "*.abc"), (_("All files"), "*")],
+                                              initialdir=self.last_dir, 
+                                              initialfile= destination + '.abc')
+        if file:
+            self.last_dir = os.path.dirname(file)
+            
+            abc_file = open(file, 'w')
+            for l in final:
+                abc_file.write(l + "\n")
+            abc_file.close()
+
+    def OnExit(self):
+        if self.Song:
+            if tkMessageBox.askyesno(_("Exit"), _("If you haven't saved your song, your work will be lost.\nAre you sure?")):
+                self.root.quit()
+        else:
+                self.root.quit()
+    def OnChords(self): ui_dialogs.ChordsWindow(self)
+    def OnClear(self): 
+        if tkMessageBox.askyesno(_("Clear chords"), _("The chords will be erased.\nAre you sure?")):
+            self.var_chords = []
+    def OnPlay(self):
+        pass
+#        validation = self.__check_values()
+#        if not validation[0]:
+#            tkMessageBox.showwarning(_("Playing song"), _("There was an error while generating the song file:\n") + validation[1])
+#            return
+#        abc2midi = preferences.get_external_prog_path('ABC2MIDI')
+#        midiplayer = preferences.get_external_prog_path('MIDIPLAYER')
+#        if not abc2midi:
+#            tkMessageBox.showwarning(_("abc2midi program not found"), _("Please, check your preferences file (") + preferences.preferences_file + ")" )
+#            return
+#        if not midiplayer:
+#            tkMessageBox.showwarning(_("MIDI player program not found"), _("Please, check your preferences file (") + preferences.preferences_file + ")" )
+#            return
+#        try:
+#            destination = self.var_title.get().title().replace(' ', '')
+#            self.Song = Song(destination, self.var_title.get(), 
+#                            self.var_tempo.get(), self.var_key.get(),
+#                            eval('song.' + self.var_style.get()), self.var_chords, 
+#                            self.var_measures.get(), self.var_choruses.get(), self.input_instruments)
+#        except MyException, e:
+#            tkMessageBox.showwarning(_("Error"), _("There was some error generating the song:\n") + str(e) + \
+#                _("\nPlease, check your song settings and chord sequence.") )
+#            self.Song = None
+#            return
+#        final = self.Song.generate_song(preferences.get_prefered_instruments())
+#        input = tempfile.mktemp('.abc')
+#        abc_file = open(input, 'w')
+#        output = os.path.abspath(self.last_dir + '/' + self.Song.id + '.mid')
+#        for l in final:
+#            abc_file.write(l + "\n")
+#        abc_file.close()
+#        command = abc2midi + ' "' + input + '" -o "' + output + '"'
+#        popen2.popen2(command)
+#        command = midiplayer + ' "' + output + '"'
+#        popen2.popen2(command)
+#        return
     def OnPrefs(self): ui_dialogs.PrefsWindow(self)
     def OnAbout(self): 
         tkMessageBox.showinfo(_("About ") + APPLICATION , APPLICATION  + _(" was written by David Asorey Álvarez (forodejazz@yahoo.es)\nThis program is free software.\nSee the files README.txt and LICENSE.txt for more details.\nThanks for using ") + APPLICATION + "!")

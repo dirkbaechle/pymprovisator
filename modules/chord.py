@@ -23,7 +23,7 @@ class Chord:
     if chord_name.strip() == "":
         raise MyException(_("Not chord given"))
     self.name = chord_name[0].upper() + chord_name[1:]
-    if not self.name in ['A','B','C','D','E','F','G']:
+    if not self.name[0] in ['A','B','C','D','E','F','G']:
         raise MyException(_("Chord not valid -> Root not valid: ") + self.name[0])
     else:
       #print self.name

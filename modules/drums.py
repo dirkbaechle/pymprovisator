@@ -23,103 +23,104 @@ wood = notes_abc[percussionname_to_int("Hi Wood Block")]
 metronome = notes_abc[percussionname_to_int("Metronome Click")]
 
 class DrumsLine:
-    def __init__(self, song):
-        self.song = song
-    def generate_line(self):
+    def __init__(self):
+        pass
+
+    def generate_line(self, song):
         "Probably, the most important piece of code."
         temp = generate_instrument_header('This is the drums line', '3', '10', '0', 
         '%%MIDI control 7 ' + str(preferences.get_prefered_volume()['drums'])
         )
-        if self.song.style.name == 'swing':
+        if song.style.name == 'swing':
             header = metronome + ' z ' + metronome + ' z ' + (metronome + ' ')*4
             temp.append(header)
             pattern1 = ride + ' ' + ride + '/> ' + ride + '/ ' + ride + ' ' +  ride + '/> ' + ride + '/ '
             pattern2 = '[' + ride + ' ' + crash +  '] ' + ride + '/> ' + ride + '/ ' + ride + ' ' +  ride + '/> ' + ride + '/ '
-            temp2 = pattern2 + (int(self.song.n_bars) - 1)*pattern1
-            for x in range(int(self.song.n_choruses)):
+            temp2 = pattern2 + (int(song.n_bars) - 1)*pattern1
+            for x in range(int(song.n_choruses)):
                 temp.append(temp2)
             temp.append(crash + '4')
             temp += generate_instrument_header('This is another drums line', '4', '10', '0', 
             '%%MIDI control 7 ' + str(preferences.get_prefered_volume()['drums']))
             temp.append('z8 ')
-            pattern3 = int(self.song.n_bars)*(' z ' + hihat + ' z ' + hihat)
-            for x in range(int(self.song.n_choruses)):
+            pattern3 = int(song.n_bars)*(' z ' + hihat + ' z ' + hihat)
+            for x in range(int(song.n_choruses)):
                 temp.append(pattern3)
             temp.append('z4')
-        elif self.song.style.name == 'even_eights':
+        elif song.style.name == 'even_eights':
             header = metronome + ' z ' + metronome + ' z ' + (metronome + ' ')*4
             temp.append(header)
             pattern1 = ride + ' ' + ride + '/ ' + ride + '/ ' + ride + '/ ' +  ride + ' ' + ride + '/ '
             pattern2 = '[' + ride + ' ' + crash +  '] ' + ride + '/ ' + ride + '/ ' + ride + '/ ' +  ride + ' ' + ride + '/ '
-            temp2 = pattern2 + (int(self.song.n_bars) - 1)*pattern1
-            for x in range(int(self.song.n_choruses)):
+            temp2 = pattern2 + (int(song.n_bars) - 1)*pattern1
+            for x in range(int(song.n_choruses)):
                 temp.append(temp2)
             temp.append(crash + '4')
             temp += generate_instrument_header('This is another drums line', '4', '10', '0', 
             '%%MIDI control 7 ' + str(preferences.get_prefered_volume()['drums']))
             temp.append('z8 ')
-            pattern3 = int(self.song.n_bars)*('z ' + hihat + ' z ' + hihat)
-            for x in range(int(self.song.n_choruses)):
+            pattern3 = int(song.n_bars)*('z ' + hihat + ' z ' + hihat)
+            for x in range(int(song.n_choruses)):
                 temp.append(pattern3)
             temp.append('z4')
-        elif self.song.style.name == 'jazz_waltz':
+        elif song.style.name == 'jazz_waltz':
             header = (metronome + ' ')*6
             temp.append(header)
             pattern1 = ride + ' ' + ride + '/> ' + ride + '/ ' + ride + ' '
             pattern2 = '[' + ride + ' ' + crash +  '] ' + ride + '/> ' + ride + '/ ' + ride + ' '
-            temp2 = pattern2 + (int(self.song.n_bars) - 1)*pattern1
-            for x in range(int(self.song.n_choruses)):
+            temp2 = pattern2 + (int(song.n_bars) - 1)*pattern1
+            for x in range(int(song.n_choruses)):
                 temp.append(temp2)
             temp.append(crash + '3')
             temp += generate_instrument_header('This is another drums line', '4', '10', '0', 
             '%%MIDI control 7 ' + str(preferences.get_prefered_volume()['drums']))
             temp.append('z6 ')
-            pattern3 = int(self.song.n_bars)*(' z ' + hihat + ' ' + hihat)
-            for x in range(int(self.song.n_choruses)):
+            pattern3 = int(song.n_bars)*(' z ' + hihat + ' ' + hihat)
+            for x in range(int(song.n_choruses)):
                 temp.append(pattern3)
             temp.append('z3')
-        elif self.song.style.name == 'waltz':
+        elif song.style.name == 'waltz':
             header = (metronome + ' ')*6
             temp.append(header)
             pattern1 = '[ ' + bass + ' ' + ride + '] ' + '[ ' + hihat + '/ ' + ride + '/ ]' + bass + '/ ' + '[ ' + hihat + ' ' + ride + '] '
             pattern2 = '[' + bass + ' ' + ride + ' ' + crash +  '] ' + '[ ' + hihat + '/ ' + ride + '/ ]' + bass + '/ ' + '[ ' + hihat + ' ' + ride + '] '
-            temp2 = pattern2 + (int(self.song.n_bars) - 1)*pattern1
-            for x in range(int(self.song.n_choruses)):
+            temp2 = pattern2 + (int(song.n_bars) - 1)*pattern1
+            for x in range(int(song.n_choruses)):
                 temp.append(temp2)
             temp.append(crash + '3')
-        elif self.song.style.name == 'five_swing':
+        elif song.style.name == 'five_swing':
             header = (metronome + ' ')*10
             temp.append(header)
             pattern1 = '[ ' + bass + ride + '] ' + ride + '/> ' + ride + '/ ' + ' ' + ride + ' ' + ride + ' ' + ride + '/> ' + ride + '/ '
             pattern2 = '[' + bass + ride + ' ' + crash +  '] ' + ride + '/> ' + ride + '/ ' + ride + ' ' + ride + ' ' + ride + '/> ' + ride + '/ '
-            temp2 = pattern2 + (int(self.song.n_bars) - 1)*pattern1
-            for x in range(int(self.song.n_choruses)):
+            temp2 = pattern2 + (int(song.n_bars) - 1)*pattern1
+            for x in range(int(song.n_choruses)):
                 temp.append(temp2)
             temp.append(crash + '5')
             temp += generate_instrument_header('This is another drums line', '4', '10', '0', 
             '%%MIDI control 7 ' + str(preferences.get_prefered_volume()['drums']))
             temp.append('z10 ')
-            pattern3 = int(self.song.n_bars)*(' z ' + hihat + ' ' + hihat + ' z ' + hihat )
-            for x in range(int(self.song.n_choruses)):
+            pattern3 = int(song.n_bars)*(' z ' + hihat + ' ' + hihat + ' z ' + hihat )
+            for x in range(int(song.n_choruses)):
                 temp.append(pattern3)
             temp.append('z5')
-        elif self.song.style.name == 'five':
+        elif song.style.name == 'five':
             header = (metronome + ' ')*10
             temp.append(header)
             pattern1 = '[ ' + bass + ride + '] ' + ride + '/ ' + ride + '/ ' + ride + ' ' + ride + ' ' + ride + '/ ' + ride + '/ '
             pattern2 = '[' + bass + ride + ' ' + crash +  '] ' + ride + '/ ' + ride + '/ ' + ' ' + ride + ' ' + ride + ' ' + ride + '/ ' + ride + '/ '
-            temp2 = pattern2 + (int(self.song.n_bars) - 1)*pattern1
-            for x in range(int(self.song.n_choruses)):
+            temp2 = pattern2 + (int(song.n_bars) - 1)*pattern1
+            for x in range(int(song.n_choruses)):
                 temp.append(temp2)
             temp.append(crash + '5')
             temp += generate_instrument_header('This is another drums line', '4', '10', '0', 
             '%%MIDI control 7 ' + str(preferences.get_prefered_volume()['drums']))
             temp.append('z10 ')
-            pattern3 = int(self.song.n_bars)*(' z ' + hihat + ' ' + hihat + ' z ' + hihat )
-            for x in range(int(self.song.n_choruses)):
+            pattern3 = int(song.n_bars)*(' z ' + hihat + ' ' + hihat + ' z ' + hihat )
+            for x in range(int(song.n_choruses)):
                 temp.append(pattern3)
             temp.append('z5')
-        elif self.song.style.name == 'latin1':
+        elif song.style.name == 'latin1':
             header = metronome + ' z ' + metronome + ' z ' + (metronome + ' ')*4
             temp.append(header)
             pattern1 = cowbell + stick + '/ ' + bass + '/ ' + \
@@ -130,11 +131,11 @@ class DrumsLine:
             cowbell + '/ ' + stick + '/ ' + 'z/ ' + stick + '/ ' + \
             cowbell + '/ ' + stick + '/ ' + stick + '/ ' + bass + '/ ' + \
             cowbell + '/ ' + stick + '/ ' + 'z/ ' + stick + '/ '
-            temp2 = pattern2 + ((int(self.song.n_bars) - 2)/2)*pattern1
-            for x in range(int(self.song.n_choruses)):
+            temp2 = pattern2 + ((int(song.n_bars) - 2)/2)*pattern1
+            for x in range(int(song.n_choruses)):
                 temp.append(temp2)
             temp.append(crash + '4')
-        elif self.song.style.name == 'latin2':
+        elif song.style.name == 'latin2':
             header = metronome + ' z ' + metronome + ' z ' + (metronome + ' ')*4
             temp.append(header)
             pattern1 = hihat + '/ ' + closedhihat + '// ' + closedhihat + '// ' + \
@@ -153,11 +154,11 @@ class DrumsLine:
             closedhihat + '/ ' + '[ ' + closedhihat + '/ ' + bass + '/ ' + wood + '/ ] ' + \
             'z/ ' + closedhihat + '/ ' + \
             '[ ' + bass + '/ ' + wood + '/ ] ' + openhihat + '/ '
-            temp2 = pattern2 + ((int(self.song.n_bars) - 2)/2)*pattern1
-            for x in range(int(self.song.n_choruses)):
+            temp2 = pattern2 + ((int(song.n_bars) - 2)/2)*pattern1
+            for x in range(int(song.n_choruses)):
                 temp.append(temp2)
             temp.append(crash + '4')
-        elif self.song.style.name == 'bossa':
+        elif song.style.name == 'bossa':
             header = metronome + ' z ' + metronome + ' z ' + (metronome + ' ')*4
             temp.append(header)
             pattern1 = '[ ' + bass + ' ' + stick  + ' ]' + hihat + '/ ' + '[ ' + bass + '/ ' + stick  + '/ ]'  + \
@@ -168,11 +169,11 @@ class DrumsLine:
             bass + ' [ ' + hihat + '/ ' + stick  + '/ ]'+ bass + '/ ' + \
             bass + ' ' + '[ ' + hihat + '/ ' + stick + '/ ]' + bass + '/ ' +  \
             '[ ' + bass + ' ' + stick  + ' ]'  + hihat + '/ ' + bass + '/ ' 
-            temp2 = pattern2 + ((int(self.song.n_bars) - 2)/2)*pattern1
-            for x in range(int(self.song.n_choruses)):
+            temp2 = pattern2 + ((int(song.n_bars) - 2)/2)*pattern1
+            for x in range(int(song.n_choruses)):
                 temp.append(temp2)
             temp.append(crash + '4')
-        elif self.song.style.name == 'samba1' or self.song.style.name == 'samba2':
+        elif song.style.name == 'samba1' or song.style.name == 'samba2':
             header = metronome + ' z ' + metronome + ' z ' + (metronome + ' ')*4
             temp.append(header)
             pattern1 = '[ ' + bass + '/ ' + stick + '/ ' + ride + '/ ]' + ride + '/ ' + \
@@ -191,29 +192,29 @@ class DrumsLine:
             '[ ' + hihat + '/ ' + ride + '/ ]' + '[ ' + bass + '/ ' + stick + '/ ' + ride + '/ ]' + \
             '[ ' + bass + '/ ' + stick + '/ ' + ride + '/ ]' + ride + '/ ' + \
             '[ ' + hihat + '/ ' + ride + '/ ]' + '[ ' + bass + '/ ' + ride + '/ ]'
-            temp2 = pattern2 + ((int(self.song.n_bars) - 2)/2)*pattern1
-            for x in range(int(self.song.n_choruses)):
+            temp2 = pattern2 + ((int(song.n_bars) - 2)/2)*pattern1
+            for x in range(int(song.n_choruses)):
                 temp.append(temp2)
             temp.append(crash + '4')
             pass
-        elif self.song.style.name == 'ballad':
+        elif song.style.name == 'ballad':
             # Like swing, with a stick hit in 4th part
             header = metronome + ' z ' + metronome + ' z ' + (metronome + ' ')*4
             temp.append(header)
             pattern1 = ride + ' ' + ride + '/> ' + ride + '/ ' + ride + ' ' +  ride + '/> ' + ride + '/ '
             pattern2 = '[' + ride + ' ' + crash +  '] ' + ride + '/> ' + ride + '/ ' + ride + ' ' +  ride + '/> ' + ride + '/ '
-            temp2 = pattern2 + (int(self.song.n_bars) - 1)*pattern1
-            for x in range(int(self.song.n_choruses)):
+            temp2 = pattern2 + (int(song.n_bars) - 1)*pattern1
+            for x in range(int(song.n_choruses)):
                 temp.append(temp2)
             temp.append(crash + '4')
             temp += generate_instrument_header('This is another drums line', '4', '10', '0', 
             '%%MIDI control 7 ' + str(preferences.get_prefered_volume()['drums']))
             temp.append('z8 ')
-            pattern3 = int(self.song.n_bars)*(' z ' + hihat + ' z ' + '[ ' + hihat + ' ' + stick + ' ]')
-            for x in range(int(self.song.n_choruses)):
+            pattern3 = int(song.n_bars)*(' z ' + hihat + ' z ' + '[ ' + hihat + ' ' + stick + ' ]')
+            for x in range(int(song.n_choruses)):
                 temp.append(pattern3)
             temp.append('z4')
-        elif self.song.style.name == 'funk':
+        elif song.style.name == 'funk':
             header = metronome + ' z ' + metronome + ' z ' + (metronome + ' ')*4
             temp.append(header)
             pattern1 = '[ ' + bass + '// ' + closedhihat + '// ]' + closedhihat + '//' + closedhihat + '//' + closedhihat + '//' + \
@@ -224,11 +225,11 @@ class DrumsLine:
             '[ ' + snare + '// ' + closedhihat + '// ]' + closedhihat + '//' + '[ ' + bass + '// ' + closedhihat + '// ]' + closedhihat + '//' + \
             closedhihat + '//' + closedhihat + '//' + '[ ' + bass + '// ' + closedhihat + '// ]' + closedhihat + '//' + \
             '[ ' + snare + '// ' + closedhihat + '// ]' + closedhihat + '//' + '[ ' + bass + '// ' + closedhihat + '// ]' + closedhihat + '//' 
-            temp2 = pattern2 + (int(self.song.n_bars) - 1)*pattern1
-            for x in range(int(self.song.n_choruses)):
+            temp2 = pattern2 + (int(song.n_bars) - 1)*pattern1
+            for x in range(int(song.n_choruses)):
                 temp.append(temp2)
             temp.append(crash + '4')
-        elif self.song.style.name == 'rock':
+        elif song.style.name == 'rock':
             header = metronome + ' z ' + metronome + ' z ' + (metronome + ' ')*4
             temp.append(header)
             pattern1 = '[ ' + bass + '/ ' + closedhihat + '/ ]' + closedhihat + '/' + \
@@ -247,17 +248,17 @@ class DrumsLine:
             '[ ' + snare + '/ ' + closedhihat + '/ ]' + closedhihat + '/' + \
             '[ ' + bass + '/ ' + closedhihat + '/ ]' + '[ ' + bass + '/ ' + closedhihat + '/ ]' + \
             '[ ' + snare + '/ ' + closedhihat + '/ ]' + openhihat + '/' 
-            temp2 = pattern2 + ((int(self.song.n_bars) - 2)/2)*pattern1
-            for x in range(int(self.song.n_choruses)):
+            temp2 = pattern2 + ((int(song.n_bars) - 2)/2)*pattern1
+            for x in range(int(song.n_choruses)):
                 temp.append(temp2)
             temp.append(crash + '4')
-        elif self.song.style.name == 'basic':
+        elif song.style.name == 'basic':
             header = metronome + ' z ' + metronome + ' z ' + (metronome + ' ')*4
             temp.append(header)
             pattern1 = bass + ' ' + stick + ' ' + bass + ' ' + stick + ' '
             pattern2 = '[' + bass + ' ' + crash +  '] ' + stick + ' ' + bass + ' ' + stick + ' ' 
-            temp2 = pattern2 + (int(self.song.n_bars) - 1)*pattern1
-            for x in range(int(self.song.n_choruses)):
+            temp2 = pattern2 + (int(song.n_bars) - 1)*pattern1
+            for x in range(int(song.n_choruses)):
                 temp.append(temp2)
             temp.append(crash + '4')
         else:

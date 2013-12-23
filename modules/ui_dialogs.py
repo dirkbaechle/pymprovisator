@@ -23,7 +23,7 @@ PLATFORM = sys.platform
 PIANO_INSTRUMENTS = tuple(instrument_names[0:24])
 BASS_INSTRUMENTS = tuple(instrument_names[32:40])
 
-# General styling, platform deppendant:
+# General styling, platform dependant:
 if PLATFORM == 'win32':
     DEFAULT_SMALL_FONT = ('helvetica', 6)
     TUPLE_EXES = [(_("Windoze Executable files"), "*.exe"), (_("All files"), "*")]

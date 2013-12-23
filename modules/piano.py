@@ -12,38 +12,35 @@ import gettext, random
 _ = gettext.gettext
 
 class PianoLine:
-    def __init__(self, instrument, song):
+    def __init__(self, instrument):
         self.instrument = instrument
-        self.song = song
-        self.meter = song.style.meter[0]
         
-    def generate_line(self):
+    def generate_line(self, song):
         "Probably, the most important piece of code."
+        meter = song.style.meter[0]
         temp = generate_instrument_header('This is the piano line', '2', '2', 
                str(instrument_names.index(self.instrument)), 
                '%%MIDI control 10 127', 
                '%%MIDI control 7 ' + str(preferences.get_prefered_volume()['piano'])
                )
-        temp.append('z' + str(int(self.meter)*2))
-        style_name = self.song.style.name
-        if style_name not in song.valid_styles:
-            raise MyException(_("Style not found"))
-        elif style_name == 'basic':
+        temp.append('z' + str(int(meter)*2))
+        style_name = song.style.name
+        if style_name == 'basic':
             aux = ''
-            for ch in self.song.chord_item_collection:
+            for ch in song.chord_item_collection:
                 aux += piano_chord(ch.chord, ch.parts)
-            for x in range(int(self.song.n_choruses)):
+            for x in range(int(song.n_choruses)):
                 temp.append(aux)
-            ch = self.song.chord_item_collection[0]
+            ch = song.chord_item_collection[0]
             temp.append(piano_chord(ch.chord, '4'))
         else:
             aux = ''
-            for ch in self.song.chord_item_collection:
-                aux += patterns_generator(ch.chord, ch.parts, style_name, self.meter)
-            for x in range(int(self.song.n_choruses)):
+            for ch in song.chord_item_collection:
+                aux += patterns_generator(ch.chord, ch.parts, style_name, meter)
+            for x in range(int(song.n_choruses)):
                 temp.append(aux)
-            ch = self.song.chord_item_collection[0]
-            temp.append(piano_chord(ch.chord, self.meter))
+            ch = song.chord_item_collection[0]
+            temp.append(piano_chord(ch.chord, meter))
         #~ print temp
         return temp
 

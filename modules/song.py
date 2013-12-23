@@ -35,7 +35,6 @@ rock = Style('rock', '4/4', '4')
 basic = Style('basic', '4/4', '4')
 
 available_styles = [swing, even_eights, jazz_waltz, waltz, five_swing, five, latin1, latin2, bossa, samba1, samba2, ballad, funk, rock, basic]
-valid_styles = [s.name for s in available_styles]
 
 class Song:
     """This class represents a jazz song. The parameters are:
@@ -75,12 +74,12 @@ class Song:
         """ prefered_instruments: Dictionary with the prefered MIDI instruments, ex.: {'bass': 'Acoustic Bass', 'piano': 'Acoustic Grand Piano'}
         """
         temp = generate_song_header(self.title, self.style.meter, self.style.tempo_unit, self.tempo, self.key)
-        self.bass_line = BassLine(prefered_instruments['bass'], self)
-        self.piano_line = PianoLine(prefered_instruments['piano'], self)
-        self.drums_line = DrumsLine(self)
-        if 'bass' in self.instruments: temp += self.bass_line.generate_line()
-        if 'piano' in self.instruments: temp += self.piano_line.generate_line()
-        if 'drums' in self.instruments: temp += self.drums_line.generate_line()
+        self.bass_line = BassLine(prefered_instruments['bass'])
+        self.piano_line = PianoLine(prefered_instruments['piano'])
+        self.drums_line = DrumsLine()
+        if 'bass' in self.instruments: temp += self.bass_line.generate_line(self)
+        if 'piano' in self.instruments: temp += self.piano_line.generate_line(self)
+        if 'drums' in self.instruments: temp += self.drums_line.generate_line(self)
         return temp
 
 if __name__ == '__main__':
@@ -97,4 +96,3 @@ if __name__ == '__main__':
     abc_file.close()
     import os
     os.system('abc2midi basic.abc -o basic.mid')
-    print valid_styles
