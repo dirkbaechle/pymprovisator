@@ -2,7 +2,7 @@
 # -*- coding: iso-8859-1 -*-
 # Pymprovisator v. 0.1.1
 # This program is free software. See the files LICENSE.TXT and README.TXT for more details
-# Written by David Asorey Álvarez (forodejazz@yahoo.es). Madrid (Spain). August 2003.
+# Written by David Asorey Ãlvarez (forodejazz@yahoo.es). Madrid (Spain). August 2003.
 
 from constants import *
 import gettext
@@ -16,7 +16,7 @@ class Chord:
       Z: Chord's type:
         'M', '6', 'maj7', 'maj9', 'maj13', 'm', , 'm6', 'm7', 'm9', 'm11', 'susb9', '#11', 'maj7#11',
         '7', '9', '13', '11', 'sus', 'sus7', 'sus9', 'sus13', 'mb6', 'm7b6', 'm7b5',
-        'mmaj7', 'mmaj9', '+maj7', 'maj7+5', 'alt', '+', '+7', 'º', 'º7', 'dism', '7b9', '7b5'
+        'mmaj7', 'mmaj9', '+maj7', 'maj7+5', 'alt', '+', '+7', 'Âº', 'Âº7', 'dism', '7b9', '7b5'
     """
   def __init__(self, chord_name):
     """Chord attributes: 'name', 'root', 'rt', 'type', 'tp', """
@@ -41,20 +41,8 @@ class Chord:
         pointer = 0
         root = 0
       #First, we set the root
-      if self.name[0] == 'G':
-        self.root = 55 + root
-      elif self.name[0] == 'A':
-        self.root = 57 + root
-      elif self.name[0] == 'B':
-        self.root = 59 + root
-      elif self.name[0] == 'C':
-        self.root = 60 + root
-      elif self.name[0] == 'D':
-        self.root = 62 + root
-      elif self.name[0] == 'E':
-        self.root = 64 + root
-      if self.name[0] == 'F':
-        self.root = 65 + root
+      if self.name[0] in 'GABCDEF':
+        self.root = 55 + root + 'G A BC D EF'.index(self.name[0])
       #Second, we set the chord quality
       if pointer:
         self.tp = self.name[pointer:]  # ex: 7#11
